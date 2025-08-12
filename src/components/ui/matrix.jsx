@@ -1,15 +1,38 @@
+import { useState } from "react";
 import { Cell } from "./cell";
 
-export function Matrix({ matrix }) {
+export function Matrix({ matrix, onBlur }) {
+  const [activeCellCoordinates, setActiveCellCoordinates] = useState(null);
+
   const rowCount = matrix.length;
   const colCount = matrix[0].length;
-  const matrixValues = [];
+  const cells = [];
 
   for (let i = 0; i < rowCount; i++) {
     for (let j = 0; j < colCount; j++) {
-      matrixValues.push(matrix[i][j]);
+      cells.push({ i, j, value: matrix[i][j] });
     }
   }
+
+  const handleBlur = (i, j, newValue) => {
+    onBlur(i, j, newValue);
+    setActiveCellCoordinates(null);
+  };
+
+  const handleEnter = () => {
+    if (activeCellCoordinates) {
+      const { i, j } = activeCellCoordinates;
+      if (j < colCount - 1) {
+        setActiveCellCoordinates({ i: i, j: j + 1 });
+      } else {
+        if (i < rowCount - 1) {
+          setActiveCellCoordinates({ i: i + 1, j: 0 });
+        } else {
+          setActiveCellCoordinates({ i: 0, j: 0 });
+        }
+      }
+    }
+  };
 
   return (
     <div className="flex">
@@ -21,9 +44,32 @@ export function Matrix({ matrix }) {
           gridTemplateRows: `repeat(${rowCount}, 1fr)`,
         }}
       >
-        {matrixValues.map((value, index) => (
-          <Cell key={index} active={false} value={value} />
-        ))}
+        {cells.map((cell, index) => {
+          let active = false;
+          if (activeCellCoordinates) {
+            if (
+              activeCellCoordinates.i === cell.i &&
+              activeCellCoordinates.j === cell.j
+            ) {
+              active = true;
+            }
+          }
+
+          active;
+          return (
+            <Cell
+              key={index}
+              coordinates={{ i: cell.i, j: cell.j }}
+              active={active}
+              value={cell.value}
+              onBlur={handleBlur}
+              onEnter={handleEnter}
+              setActiveCellCoordinates={(coordinates) =>
+                setActiveCellCoordinates(coordinates)
+              }
+            />
+          );
+        })}
       </div>
       <div className="z-10 ml-[-0.5rem] w-2 border-t border-r border-b" />
     </div>

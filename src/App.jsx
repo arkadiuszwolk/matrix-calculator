@@ -4,7 +4,22 @@ import { SlidingTabs } from "./components/ui/sliding-tabs";
 import { Matrix } from "./components/ui/matrix";
 
 function App() {
+  const [matrix1, setMatrix1] = useState([
+    [2, 3, 1],
+    [0, 18, 7],
+    [4, 5, 52],
+  ]);
+  // const [matrix2, setMatrix2] = useState([
+  //   [0, 8, 3],
+  //   [91, 3, 0],
+  // ]);
   const [activeTabIndex, setActiveTabIndex] = useState(0);
+
+  function changeMatrix1Cell(i, j, newValue) {
+    const newMatrix1 = [...matrix1];
+    newMatrix1[i][j] = newValue;
+    setMatrix1(newMatrix1);
+  }
 
   return (
     <>
@@ -16,19 +31,8 @@ function App() {
         />
       </div>
       <div className="flex items-start justify-center gap-24">
-        <Matrix
-          matrix={[
-            [2, 3, 1],
-            [0, 18, 7],
-            [4, 5, 52],
-          ]}
-        />
-        <Matrix
-          matrix={[
-            [0, 8, 3],
-            [91, 3, 0],
-          ]}
-        />
+        <Matrix matrix={matrix1} onBlur={changeMatrix1Cell} />
+        {/* <Matrix matrix={matrix2} /> */}
       </div>
     </>
   );
