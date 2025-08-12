@@ -9,15 +9,12 @@ function App() {
     [0, 18, 7],
     [4, 5, 52],
   ]);
-  // const [matrix2, setMatrix2] = useState([
-  //   [0, 8, 3],
-  //   [91, 3, 0],
-  // ]);
-  const [activeTabIndex, setActiveTabIndex] = useState(0);
 
+  const [activeTabIndex, setActiveTabIndex] = useState(0);
+  console.log(matrix1);
   function changeMatrix1Cell(i, j, newValue) {
     const newMatrix1 = [...matrix1];
-    newMatrix1[i][j] = newValue;
+    newMatrix1[i][j] = Number(newValue);
     setMatrix1(newMatrix1);
   }
 
