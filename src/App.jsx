@@ -44,43 +44,96 @@ function App() {
           onChange={(index) => setActiveTabIndex(index)}
         />
       </div>
-      <div className="flex items-start justify-center gap-80">
+      <div className="flex items-start justify-center gap-4">
         <div className="flex flex-col gap-2">
-          <div className="flex h-64 flex-col items-center gap-4">
-            <span>Macierz A</span>
+          <div className="flex h-72 w-128 flex-col items-center gap-4">
+            <span className="font-medium">Macierz A</span>
             <Matrix matrix={matrix1} onBlur={changeMatrix1Cell} />
           </div>
-          <Stepper
-            onMinus={() => setMatrix1(deleteRow(matrix1))}
-            onPlus={() => setMatrix1(addRow(matrix1))}
-          >
-            {matrix1.length}
-          </Stepper>
-          <Stepper
-            onMinus={() => setMatrix1(deleteColumn(matrix1))}
-            onPlus={() => setMatrix1(addColumn(matrix1))}
-          >
-            {matrix1[0].length}
-          </Stepper>
+          <div className="flex flex-col items-center gap-2">
+            <div className="flex items-center">
+              <span className="w-32">Liczba wierszy</span>
+              <Stepper
+                onMinus={() => setMatrix1(deleteRow(matrix1))}
+                onPlus={() => setMatrix1(addRow(matrix1))}
+                isMinusDisabled={matrix1.length === 1}
+                isPlusDisabled={matrix1.length === 5}
+              >
+                {matrix1.length}
+              </Stepper>
+            </div>
+            <div className="flex items-center">
+              <span className="w-32">Liczba kolumn</span>
+              <Stepper
+                onMinus={() => setMatrix1(deleteColumn(matrix1))}
+                onPlus={() => setMatrix1(addColumn(matrix1))}
+                isMinusDisabled={matrix1[0].length === 1}
+                isPlusDisabled={matrix1[0].length === 5}
+              >
+                {matrix1[0].length}
+              </Stepper>
+            </div>
+          </div>
         </div>
+
+        <button
+          onClick={() => {
+            const temporaryMatrix = matrix1;
+            setMatrix1(matrix2);
+            setMatrix2(temporaryMatrix);
+          }}
+          className="mt-24 h-12 w-12 cursor-pointer rounded-2xl border border-neutral-200 bg-neutral-100"
+        >
+          =
+        </button>
+
         <div className="flex flex-col gap-2">
-          <div className="flex h-64 flex-col items-center gap-4">
-            <span>Macierz B</span>
+          <div className="flex h-72 w-128 flex-col items-center gap-4">
+            <span className="font-medium">Macierz B</span>
             <Matrix matrix={matrix2} onBlur={changeMatrix2Cell} />
           </div>
-          <Stepper
-            onMinus={() => setMatrix2(deleteRow(matrix2))}
-            onPlus={() => setMatrix2(addRow(matrix2))}
-          >
-            {matrix2.length}
-          </Stepper>
-          <Stepper
-            onMinus={() => setMatrix2(deleteColumn(matrix2))}
-            onPlus={() => setMatrix2(addColumn(matrix2))}
-          >
-            {matrix2[0].length}
-          </Stepper>
+          <div className="flex flex-col items-center gap-2">
+            <div className="flex items-center">
+              <span className="w-32">Liczba wierszy</span>
+              <Stepper
+                onMinus={() => setMatrix2(deleteRow(matrix2))}
+                onPlus={() => setMatrix2(addRow(matrix2))}
+                isMinusDisabled={matrix2.length === 1}
+                isPlusDisabled={matrix2.length === 5}
+              >
+                {matrix2.length}
+              </Stepper>
+            </div>
+            <div className="flex items-center">
+              <span className="w-32">Liczba kolumn</span>
+              <Stepper
+                onMinus={() => setMatrix2(deleteColumn(matrix2))}
+                onPlus={() => setMatrix2(addColumn(matrix2))}
+                isMinusDisabled={matrix2[0].length === 1}
+                isPlusDisabled={matrix2[0].length === 5}
+              >
+                {matrix2[0].length}
+              </Stepper>
+            </div>
+          </div>
         </div>
+      </div>
+      <div className="mt-24 h-72 bg-neutral-800 text-white">
+        <h2>Operacje:</h2>
+        <ul>
+          <li>
+            <button>A + B</button>
+          </li>
+          <li>
+            <button>A - B</button>
+          </li>
+          <li>
+            <button>A * B</button>
+          </li>
+          <li>
+            <button>B * A</button>
+          </li>
+        </ul>
       </div>
     </>
   );
