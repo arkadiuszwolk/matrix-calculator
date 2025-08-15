@@ -9,6 +9,9 @@ import {
   deleteColumn,
   deleteRow,
 } from "./lib/changeMatrixSize";
+import { ShowMatrix } from "./components/ui/show-matrix";
+import { OperationButton } from "./components/ui/operation-button";
+import { GithubLogo } from "./components/github-logo";
 
 function App() {
   const [matrix1, setMatrix1] = useState([
@@ -37,12 +40,18 @@ function App() {
 
   return (
     <>
-      <div className="mb-10 flex w-full justify-center py-2">
+      <div className="mb-10 flex w-full items-center justify-between border-b border-neutral-200 px-4 py-2">
+        <div className="w-64">
+          <h1 className="font-bold">MATRIX Calculator</h1>
+        </div>
         <SlidingTabs
-          tabs={["Arytmetyka", "Transformacje", "Operacje elementarne"]}
+          tabs={["Kalkulator", "Teoria", "Przewodnik użytkowania"]}
           activeTabIndex={activeTabIndex}
           onChange={(index) => setActiveTabIndex(index)}
         />
+        <div className="flex w-64 justify-end">
+          <GithubLogo size="2.5rem" />
+        </div>
       </div>
       <div className="flex items-start justify-center gap-4">
         <div className="flex flex-col gap-2">
@@ -118,22 +127,82 @@ function App() {
           </div>
         </div>
       </div>
-      <div className="mt-24 h-72 bg-neutral-800 text-white">
-        <h2>Operacje:</h2>
-        <ul>
-          <li>
-            <button>A + B</button>
-          </li>
-          <li>
-            <button>A - B</button>
-          </li>
-          <li>
-            <button>A * B</button>
-          </li>
-          <li>
-            <button>B * A</button>
-          </li>
-        </ul>
+      <div className="mt-24 bg-neutral-800 p-12 py-12 text-white">
+        <div className="flex items-start justify-center gap-16">
+          <div className="grid grid-cols-2 grid-rows-2 gap-2">
+            <OperationButton>det ( A )</OperationButton>
+            <OperationButton>rank ( A )</OperationButton>
+            <OperationButton>
+              A <sup>-1</sup>
+            </OperationButton>
+            <OperationButton>
+              A <sup>T</sup>
+            </OperationButton>
+          </div>
+          <div className="grid grid-cols-2 grid-rows-3 gap-2">
+            <OperationButton>A + B</OperationButton>
+            <OperationButton>A ○ B</OperationButton>
+            <OperationButton>A - B</OperationButton>
+            <OperationButton>A * B</OperationButton>
+            <OperationButton>B - A</OperationButton>
+            <OperationButton>B * A</OperationButton>
+          </div>
+          <div className="grid grid-cols-2 grid-rows-2 gap-2">
+            <OperationButton>det ( B )</OperationButton>
+            <OperationButton>rank ( B )</OperationButton>
+            <OperationButton>
+              B <sup>-1</sup>
+            </OperationButton>
+            <OperationButton>
+              B <sup>T</sup>
+            </OperationButton>
+          </div>
+        </div>
+
+        <div className="mt-12 flex items-center justify-center gap-4">
+          <ShowMatrix
+            matrix={[
+              [1, 2, 3],
+              [4, 5, 6],
+            ]}
+          />
+          <span>+</span>
+          <ShowMatrix
+            matrix={[
+              [7, 8, 9],
+              [10, 11, 12],
+            ]}
+          />
+          <span>=</span>
+          <ShowMatrix
+            matrix={[
+              [8, 10, 12],
+              [14, 16, 18],
+            ]}
+          />
+        </div>
+        <div className="mt-12 flex items-center justify-center gap-4">
+          <ShowMatrix
+            matrix={[
+              [1, 2, 3],
+              [4, 5, 6],
+            ]}
+          />
+          <span>+</span>
+          <ShowMatrix
+            matrix={[
+              [7, 8, 9],
+              [10, 11, 12],
+            ]}
+          />
+          <span>=</span>
+          <ShowMatrix
+            matrix={[
+              [8, 10, 12],
+              [14, 16, 18],
+            ]}
+          />
+        </div>
       </div>
     </>
   );
