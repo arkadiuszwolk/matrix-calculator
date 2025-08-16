@@ -19,7 +19,7 @@ export function ShowMatrix({ matrix }) {
           gridTemplateRows: `repeat(${rowCount}, 1fr)`,
         }}
       >
-        {cells.map((cell, index) => {
+        {cells.map((cell) => {
           return (
             <div
               key={`${cell.i}-${cell.j}`}

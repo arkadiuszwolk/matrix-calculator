@@ -12,6 +12,7 @@ import {
 import { ShowMatrix } from "./components/ui/show-matrix";
 import { OperationButton } from "./components/ui/operation-button";
 import { GithubLogo } from "./components/github-logo";
+import { HistoryItem } from "./components/history-item";
 
 function App() {
   const [matrix1, setMatrix1] = useState([
@@ -127,8 +128,8 @@ function App() {
           </div>
         </div>
       </div>
-      <div className="mt-24 bg-neutral-800 p-12 py-12 text-white">
-        <div className="flex items-start justify-center gap-16">
+      <div className="mt-24 bg-neutral-800 text-white">
+        <div className="flex items-start justify-center gap-16 p-12">
           <div className="grid grid-cols-2 grid-rows-2 gap-2">
             <OperationButton>det ( A )</OperationButton>
             <OperationButton>rank ( A )</OperationButton>
@@ -159,7 +160,7 @@ function App() {
           </div>
         </div>
 
-        <div className="mt-12 flex items-center justify-center gap-4">
+        {/* <div className="mt-12 flex items-center justify-center gap-4">
           <ShowMatrix
             matrix={[
               [1, 2, 3],
@@ -181,7 +182,7 @@ function App() {
             ]}
           />
         </div>
-        <div className="mt-12 flex items-center justify-center gap-4">
+        <div className="mt-12 mb-12 flex items-center justify-center gap-4">
           <ShowMatrix
             matrix={[
               [1, 2, 3],
@@ -202,7 +203,11 @@ function App() {
               [14, 16, 18],
             ]}
           />
-        </div>
+        </div> */}
+        <HistoryItem bg="bg-neutral-900" />
+        <HistoryItem bg="bg-neutral-800" />
+        <HistoryItem bg="bg-neutral-900" />
+        <HistoryItem bg="bg-neutral-800" />
       </div>
     </>
   );
