@@ -15,6 +15,8 @@ import { GithubLogo } from "./components/github-logo";
 import { HistoryItem } from "./components/history-item";
 import { TwoMatrixHistoryItem } from "./components/two-matrix-history-item";
 import { calculateTheSum } from "./lib/calculateTheSum";
+import { calculateTheHadamardProduct } from "./lib/calculateTheHadamardProduct";
+import { calculateTheDifference } from "./lib/calculateTheDifference";
 
 function App() {
   const [matrix1, setMatrix1] = useState([
@@ -162,8 +164,45 @@ function App() {
             >
               A + B
             </OperationButton>
-            <OperationButton>A ○ B</OperationButton>
-            <OperationButton>A - B</OperationButton>
+            <OperationButton
+              onClick={() => {
+                const newData = {
+                  id: 1,
+                  operation: "Iloczyn Hadamarda",
+                  date: "17-08-2025 18:24",
+                  element1: "A",
+                  element2: "B",
+                  symbol: "○",
+                  matrix1: matrix1,
+                  matrix2: matrix2,
+                  resultingMatrix: calculateTheHadamardProduct(
+                    matrix1,
+                    matrix2,
+                  ),
+                };
+                setHistory([newData, ...history]);
+              }}
+            >
+              A ○ B
+            </OperationButton>
+            <OperationButton
+              onClick={() => {
+                const newData = {
+                  id: 1,
+                  operation: "Różnica macierzy",
+                  date: "17-08-2025 18:24",
+                  element1: "A",
+                  element2: "B",
+                  symbol: "-",
+                  matrix1: matrix1,
+                  matrix2: matrix2,
+                  resultingMatrix: calculateTheDifference(matrix1, matrix2),
+                };
+                setHistory([newData, ...history]);
+              }}
+            >
+              A - B
+            </OperationButton>
             <OperationButton>A * B</OperationButton>
             <OperationButton>B - A</OperationButton>
             <OperationButton>B * A</OperationButton>
