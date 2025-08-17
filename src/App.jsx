@@ -13,6 +13,8 @@ import { ShowMatrix } from "./components/ui/show-matrix";
 import { OperationButton } from "./components/ui/operation-button";
 import { GithubLogo } from "./components/github-logo";
 import { HistoryItem } from "./components/history-item";
+import { TwoMatrixHistoryItem } from "./components/two-matrix-history-item";
+import { calculateTheSum } from "./lib/calculateTheSum";
 
 function App() {
   const [matrix1, setMatrix1] = useState([
@@ -24,6 +26,7 @@ function App() {
     [0, -5, 30],
     [6, 0, -7],
   ]);
+  const [history, setHistory] = useState([]);
 
   const [activeTabIndex, setActiveTabIndex] = useState(0);
 
@@ -41,7 +44,7 @@ function App() {
 
   return (
     <>
-      <div className="mb-10 flex w-full items-center justify-between border-b border-neutral-200 px-4 py-2">
+      <div className="mb-10 flex w-full items-center justify-between px-4 py-2">
         <div className="w-64">
           <h1 className="font-bold">MATRIX Calculator</h1>
         </div>
@@ -141,7 +144,24 @@ function App() {
             </OperationButton>
           </div>
           <div className="grid grid-cols-2 grid-rows-3 gap-2">
-            <OperationButton>A + B</OperationButton>
+            <OperationButton
+              onClick={() => {
+                const newData = {
+                  id: 1,
+                  operation: "Suma macierzy",
+                  date: "17-08-2025 18:24",
+                  element1: "A",
+                  element2: "B",
+                  symbol: "+",
+                  matrix1: matrix1,
+                  matrix2: matrix2,
+                  resultingMatrix: calculateTheSum(matrix1, matrix2),
+                };
+                setHistory([newData, ...history]);
+              }}
+            >
+              A + B
+            </OperationButton>
             <OperationButton>A ○ B</OperationButton>
             <OperationButton>A - B</OperationButton>
             <OperationButton>A * B</OperationButton>
@@ -159,55 +179,18 @@ function App() {
             </OperationButton>
           </div>
         </div>
-
-        {/* <div className="mt-12 flex items-center justify-center gap-4">
-          <ShowMatrix
-            matrix={[
-              [1, 2, 3],
-              [4, 5, 6],
-            ]}
+        {history.map((data, index) => (
+          <TwoMatrixHistoryItem
+            key={data.id}
+            data={data}
+            bg={index % 2 === 0 ? "bg-neutral-900" : "bg-neutral-800"}
           />
-          <span>+</span>
-          <ShowMatrix
-            matrix={[
-              [7, 8, 9],
-              [10, 11, 12],
-            ]}
-          />
-          <span>=</span>
-          <ShowMatrix
-            matrix={[
-              [8, 10, 12],
-              [14, 16, 18],
-            ]}
-          />
-        </div>
-        <div className="mt-12 mb-12 flex items-center justify-center gap-4">
-          <ShowMatrix
-            matrix={[
-              [1, 2, 3],
-              [4, 5, 6],
-            ]}
-          />
-          <span>+</span>
-          <ShowMatrix
-            matrix={[
-              [7, 8, 9],
-              [10, 11, 12],
-            ]}
-          />
-          <span>=</span>
-          <ShowMatrix
-            matrix={[
-              [8, 10, 12],
-              [14, 16, 18],
-            ]}
-          />
-        </div> */}
+        ))}
+        {/* 
         <HistoryItem bg="bg-neutral-900" />
         <HistoryItem bg="bg-neutral-800" />
         <HistoryItem bg="bg-neutral-900" />
-        <HistoryItem bg="bg-neutral-800" />
+        <HistoryItem bg="bg-neutral-800" /> */}
       </div>
     </>
   );

@@ -1,6 +1,9 @@
-export function OperationButton({ children }) {
+export function OperationButton({ children, onClick }) {
   return (
-    <button className="w-42 rounded-full border border-dashed border-neutral-500 px-4 py-2 hover:cursor-pointer hover:bg-neutral-700">
+    <button
+      onClick={onClick}
+      className="w-42 rounded-full border border-dashed border-neutral-500 px-4 py-2 hover:cursor-pointer hover:bg-neutral-700"
+    >
       {children}
     </button>
   );
