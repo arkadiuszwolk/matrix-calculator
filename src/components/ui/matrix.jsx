@@ -44,7 +44,7 @@ export function Matrix({ matrix, onBlur }) {
           gridTemplateRows: `repeat(${rowCount}, 1fr)`,
         }}
       >
-        {cells.map((cell, index) => {
+        {cells.map((cell) => {
           let active = false;
           if (activeCellCoordinates) {
             if (
@@ -58,7 +58,7 @@ export function Matrix({ matrix, onBlur }) {
           active;
           return (
             <Cell
-              key={index}
+              key={`${cell.i}-${cell.j}`}
               coordinates={{ i: cell.i, j: cell.j }}
               active={active}
               value={cell.value}

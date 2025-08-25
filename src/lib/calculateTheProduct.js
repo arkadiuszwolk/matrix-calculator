@@ -1,15 +1,28 @@
-export function calculateTheSum(matrix1, matrix2) {
-  const rowCount = matrix1.length;
-  const colCount = matrix1[0].length;
+export function calculateTheProduct(matrix1, matrix2) {
+  const n = matrix1.length;
+  const m = matrix1[0].length;
 
-  const newMatrix = [];
-  for (let i = 0; i < rowCount; i++) {
-    const row = [];
-    for (let j = 0; j < colCount; j++) {
-      row.push(matrix1[i][j] + matrix2[i][j]);
-    }
-    newMatrix.push(row);
+  const p = matrix2.length;
+  const q = matrix2[0].length;
+
+  if (m !== p) {
+    return [
+      [0, 0],
+      [0, 0],
+    ];
   }
+
+  const newMatrix = Array.from({ length: n }, () => Array(q).fill(0));
+
+  for (let i = 0; i < n; i++) {
+    for (let j = 0; j < q; j++) {
+      for (let k = 0; k < m; k++) {
+        newMatrix[i][j] += matrix1[i][k] * matrix2[k][j];
+      }
+    }
+  }
+
+  console.log(newMatrix);
 
   return newMatrix;
 }

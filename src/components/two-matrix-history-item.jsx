@@ -19,6 +19,15 @@ export function TwoMatrixHistoryItem({ bg, data }) {
           <span>=</span>
           <ShowMatrix matrix={data.resultingMatrix} />
         </div>
+        <div>
+          <span>Wstaw wynik do:</span>
+          <button className="rounded-full border border-dashed border-neutral-700 px-4 py-2 hover:cursor-pointer hover:bg-neutral-600">
+            Macierz A
+          </button>
+          <button className="rounded-full border border-dashed border-neutral-700 px-4 py-2 hover:cursor-pointer hover:bg-neutral-600">
+            Macierz B
+          </button>
+        </div>
       </div>
     </div>
   );
